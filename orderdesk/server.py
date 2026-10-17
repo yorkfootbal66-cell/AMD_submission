@@ -34,7 +34,7 @@ PAGE = """<!doctype html><meta charset="utf-8"><title>Order desk agent</title>
 def model_facts(model: ChatModel) -> dict:
     stand_in = model.name == stub_model.NAME
     return {"endpoint_host": model.endpoint_host, "model": model.name, "is_the_local_stand_in": stand_in,
-            "runs_on_amd": "NOT SHOWN: this is the local stand-in" if stand_in else "CLAIMED BY CONFIGURATION ONLY: see docs/AMD_SETUP.md for the evidence to keep"}
+            "runs_on_amd": "NOT SHOWN: this is the local stand-in" if stand_in else "CLAIMED BY CONFIGURATION ONLY: the endpoint is whatever the owner configured (intended: AMD Token Factory); see docs/TOKEN_FACTORY.md for what the evidence shows"}
 
 
 def make_handler(desk: OrderDesk, model: ChatModel):

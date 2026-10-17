@@ -2,9 +2,9 @@
 
 A small agent for an online shop's order desk. It reads a customer email with an open language model, decides by written rules what may be done without a person, does it in the order book, and hands every other case to a person with the reasons.
 
-Built for the AMD Developer Hackathon ACT III (track "Reinvent Commerce": help a business serve and retain customers). The model is meant to run on AMD hardware: an open model served by vLLM on AMD Developer Cloud, reached through its OpenAI-compatible endpoint.
+Built for the AMD Developer Hackathon ACT III (track "Reinvent Commerce": help a business serve and retain customers). The model is meant to run on AMD hardware: an open model served by AMD's Token Factory, reached through its OpenAI-compatible API.
 
-**Status, stated plainly.** The app, its rules, its tests and its container file are here and work with the local stand-in. **It has not been run against a model on AMD hardware yet**: that needs an AMD Developer Cloud instance, which this repository does not contain. See [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md) for what is done and what is missing.
+**Status, stated plainly.** The app, its rules, its tests and its container file are here and work with the local stand-in. **It has not yet been run against AMD's Token Factory**: that needs the owner's Token Factory API key, which this repository does not contain. See [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md) for what is done and what is missing.
 
 ## What it does
 
@@ -35,20 +35,23 @@ Open http://127.0.0.1:8080 and paste an email from [`samples/emails.json`](sampl
 
 The stand-in is a few regular expressions behind the same HTTP interface. It is not a language model and not AMD, and the page says so while it is in use.
 
-## Run it against the model on AMD
+## Run it against the model on AMD (Token Factory)
 
-1. Start a vLLM server with an open model on an AMD Developer Cloud GPU instance: [docs/AMD_SETUP.md](docs/AMD_SETUP.md).
-2. Point the app at it. Keys go in the environment, never in a file:
+The model is read through AMD's Token Factory (`notebooks.amd.com/tokenfactory`), the organiser-provided OpenAI-compatible service. Steps and what the evidence does and does not show: [docs/TOKEN_FACTORY.md](docs/TOKEN_FACTORY.md). Keys go in the environment, never in a file:
 
 ```
-set ORDERDESK_MODEL_BASE_URL=http://<instance address>:8000/v1
-set ORDERDESK_MODEL_NAME=<the model vLLM serves>
-set ORDERDESK_MODEL_API_KEY=<the key you gave vLLM, if any>
+export ORDERDESK_MODEL_BASE_URL=<base URL from Token Factory, ending in /v1>
+export ORDERDESK_MODEL_NAME=<model id from Token Factory>
+export ORDERDESK_MODEL_API_KEY=<your key>
 python scripts/check_amd_endpoint.py
 python -m orderdesk.server
 ```
 
 `check_amd_endpoint.py` has the endpoint read all ten sample emails and writes what it answered.
+
+## Authorship
+
+This code was written by an AI model (Claude, by Anthropic) for the repository owner. Licence: MIT.
 
 ## Container
 
