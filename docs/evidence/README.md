@@ -1,3 +1,7 @@
-# Evidence of real runs (kept in the repository, because the hosted demo's /tmp storage is lost on restart)
+# Evidence (2026-10-17, synthetic data only)
 
-After the Token Factory run, commit here: `AMD_ENDPOINT_CHECK.json`, a copy of the demo session's `ledger.jsonl` (download from `/api/cases`), and a screenshot or saved text of the provider page with the key hidden. Nothing in this folder is a result until those files exist.
+- `models_response.json`: raw `GET /models` from the Token Factory endpoint.
+- `AMD_ENDPOINT_CHECK.json`: `scripts/check_amd_endpoint.py`, 10 of 10 read; median 2.7 s.
+- `APP_RUN_RESULTS.json`, `ledger.jsonl`, `orders_after_run.json`: the real application handling the ten samples; 10 of 10 matched expectations.
+- Note: the two runs are separate model calls. The email "told to ignore the rules" was read with confidence 0.9 in the check and 0.2 in the app run; both ended with a person (by the rules in one, by low confidence in the other). Model output varies between calls.
+- What this shows: the app sent real requests to this endpoint and got these answers. Hardware is attributed to the provider's manual (shared endpoints run on AMD GPUs); no independent measurement exists. The provider's price list shows non-zero per-token prices for the model; usage here was ~30 short requests.

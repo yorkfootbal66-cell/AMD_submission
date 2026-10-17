@@ -1,0 +1,62 @@
+[
+ {
+  "order_id": "AB-1001",
+  "customer": "c.rossi@example.com",
+  "item": "ceramic mug, blue",
+  "amount": 24.9,
+  "status": "replacement_sent",
+  "ordered_on": "2026-10-01",
+  "promised_by": "2026-10-05",
+  "tracking_url": "https://track.example.com/AB-1001"
+ },
+ {
+  "order_id": "AB-1002",
+  "customer": "m.bianchi@example.com",
+  "item": "espresso machine",
+  "amount": 189.0,
+  "status": "delivered",
+  "ordered_on": "2026-10-03",
+  "promised_by": "2026-10-08",
+  "tracking_url": "https://track.example.com/AB-1002"
+ },
+ {
+  "order_id": "AB-1003",
+  "customer": "l.ferrari@example.com",
+  "item": "linen tablecloth",
+  "amount": 42.0,
+  "status": "cancelled",
+  "ordered_on": "2026-10-12",
+  "promised_by": "2026-10-17",
+  "tracking_url": ""
+ },
+ {
+  "order_id": "AB-1004",
+  "customer": "g.russo@example.com",
+  "item": "olive oil, 3 bottles",
+  "amount": 31.5,
+  "status": "shipped",
+  "ordered_on": "2026-10-06",
+  "promised_by": "2026-10-10",
+  "tracking_url": "https://track.example.com/AB-1004"
+ },
+ {
+  "order_id": "AB-1005",
+  "customer": "s.romano@example.com",
+  "item": "wall clock",
+  "amount": 27.0,
+  "status": "shipped",
+  "ordered_on": "2026-09-24",
+  "promised_by": "2026-10-01",
+  "tracking_url": "https://track.example.com/AB-1005"
+ },
+ {
+  "order_id": "AB-1006",
+  "customer": "e.gallo@example.com",
+  "item": "notebook set",
+  "amount": 19.99,
+  "status": "delivered",
+  "ordered_on": "2026-08-20",
+  "promised_by": "2026-08-25",
+  "tracking_url": "https://track.example.com/AB-1006"
+ }
+]

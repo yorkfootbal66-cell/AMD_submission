@@ -4,7 +4,7 @@ A small agent for an online shop's order desk. It reads a customer email with an
 
 Built for the AMD Developer Hackathon ACT III (track "Reinvent Commerce": help a business serve and retain customers). The model is meant to run on AMD hardware: an open model served by AMD's Token Factory, reached through its OpenAI-compatible API.
 
-**Status, stated plainly.** The app, its rules, its tests and its container file are here and work with the local stand-in. **It has not yet been run against AMD's Token Factory**: that needs the owner's Token Factory API key, which this repository does not contain. See [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md) for what is done and what is missing.
+**Status, stated plainly.** On 2026-10-17 the application ran against `DeepSeek-V4-Flash` on AMD's Token Factory shared endpoint (`developer.amd.com.cn/radeon/api/v1`): all 10 synthetic sample emails ended as expected (3 settled by the agent, 7 handed to a person), median model read 2.7 s. Raw results are in [docs/evidence/](docs/evidence/). Per the provider's manual these shared endpoints run on AMD GPUs; we did not observe the hardware ourselves. The container build and a deployed public URL are not verified here.
 
 ## What it does
 

@@ -1,0 +1,99 @@
+{
+ "model": "DeepSeek-V4-Flash",
+ "endpoint_host": "developer.amd.com.cn",
+ "pinned_today": "2026-10-13",
+ "matches": 10,
+ "of": 10,
+ "cases": [
+  {
+   "sample": "damaged mug",
+   "expected": "REPLACE",
+   "action": "REPLACE",
+   "by": "agent",
+   "match": true,
+   "reason": "damaged item, delivered 12 day(s) ago, 24.90 is within the limit",
+   "latency_ms": 3879
+  },
+  {
+   "sample": "expensive refund",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "match": true,
+   "reason": "the order is 189.00: above the 50.00 the agent may settle alone",
+   "latency_ms": 2621
+  },
+  {
+   "sample": "cancel before shipping",
+   "expected": "CANCEL",
+   "action": "CANCEL",
+   "by": "agent",
+   "match": true,
+   "reason": "the order has not shipped",
+   "latency_ms": 3449
+  },
+  {
+   "sample": "a little late",
+   "expected": "SEND_TRACKING",
+   "action": "SEND_TRACKING",
+   "by": "agent",
+   "match": true,
+   "reason": "shipped, 3 day(s) past the promised date",
+   "latency_ms": 2640
+  },
+  {
+   "sample": "very late",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "match": true,
+   "reason": "12 days past the promised date: more than the 7 the agent may answer alone",
+   "latency_ms": 3039
+  },
+  {
+   "sample": "outside the window",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "match": true,
+   "reason": "ordered 54 days ago: outside the 30-day window",
+   "latency_ms": 2845
+  },
+  {
+   "sample": "legal threat",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "match": true,
+   "reason": "the customer's message mentions: lawyer, injured",
+   "latency_ms": 2679
+  },
+  {
+   "sample": "unclear",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "match": true,
+   "reason": "the request is not one of the kinds the agent handles",
+   "latency_ms": 2501
+  },
+  {
+   "sample": "unknown order",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "match": true,
+   "reason": "no order with that number is in the order book",
+   "latency_ms": 2480
+  },
+  {
+   "sample": "told to ignore the rules",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "match": true,
+   "reason": "the model was not sure of its reading (confidence 0.20, needed 0.70)",
+   "latency_ms": 2626
+  }
+ ]
+}
