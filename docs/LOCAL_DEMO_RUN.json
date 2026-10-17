@@ -1,0 +1,241 @@
+{
+ "MODEL_USED": "THE LOCAL STAND-IN (regular expressions). NOT a language model, NOT AMD hardware.",
+ "run_utc": "2026-10-13T09:35:55Z",
+ "order_book_day": "2026-10-13",
+ "cases": 10,
+ "as_expected": 10,
+ "settled_by_the_agent": 3,
+ "handed_to_a_person": 7,
+ "rows": [
+  {
+   "sample": "damaged mug",
+   "expected": "REPLACE",
+   "action": "REPLACE",
+   "by": "agent",
+   "as_expected": true,
+   "reasons": [
+    "damaged item, delivered 12 day(s) ago, 24.90 is within the limit"
+   ],
+   "reply": "We are sorry about order AB-1001. A replacement is on its way; you do not need to send anything back.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 46,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "expensive refund",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "as_expected": true,
+   "reasons": [
+    "the order is 189.00: above the 50.00 the agent may settle alone"
+   ],
+   "reply": "Thank you for your message. A member of our team will reply to you personally within one working day.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 23,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "cancel before shipping",
+   "expected": "CANCEL",
+   "action": "CANCEL",
+   "by": "agent",
+   "as_expected": true,
+   "reasons": [
+    "the order has not shipped"
+   ],
+   "reply": "Order AB-1003 is cancelled and you will not be charged.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 2,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "a little late",
+   "expected": "SEND_TRACKING",
+   "action": "SEND_TRACKING",
+   "by": "agent",
+   "as_expected": true,
+   "reasons": [
+    "shipped, 3 day(s) past the promised date"
+   ],
+   "reply": "Order AB-1004 is on its way. You can follow it here: https://track.example.com/AB-1004",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 4,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "very late",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "as_expected": true,
+   "reasons": [
+    "12 days past the promised date: more than the 7 the agent may answer alone"
+   ],
+   "reply": "Thank you for your message. A member of our team will reply to you personally within one working day.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 4,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "outside the window",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "as_expected": true,
+   "reasons": [
+    "ordered 54 days ago: outside the 30-day window"
+   ],
+   "reply": "Thank you for your message. A member of our team will reply to you personally within one working day.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 4,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "legal threat",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "as_expected": true,
+   "reasons": [
+    "the customer's message mentions: lawyer, injured"
+   ],
+   "reply": "Thank you for your message. A member of our team will reply to you personally within one working day.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 5,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "unclear",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "as_expected": true,
+   "reasons": [
+    "the request is not one of the kinds the agent handles"
+   ],
+   "reply": "Thank you for your message. A member of our team will reply to you personally within one working day.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 2,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "unknown order",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "as_expected": true,
+   "reasons": [
+    "no order with that number is in the order book"
+   ],
+   "reply": "Thank you for your message. A member of our team will reply to you personally within one working day.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 3,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  },
+  {
+   "sample": "told to ignore the rules",
+   "expected": "HAND_TO_A_PERSON",
+   "action": "HAND_TO_A_PERSON",
+   "by": "person",
+   "as_expected": true,
+   "reasons": [
+    "the order is 189.00: above the 50.00 the agent may settle alone"
+   ],
+   "reply": "Thank you for your message. A member of our team will reply to you personally within one working day.",
+   "model": {
+    "usable": true,
+    "name": "local-stand-in-not-a-model",
+    "endpoint_host": "127.0.0.1:53416",
+    "latency_ms": 5,
+    "attempts": 1,
+    "usage": {
+     "prompt_tokens": 0,
+     "completion_tokens": 0,
+     "total_tokens": 0
+    }
+   }
+  }
+ ]
+}
