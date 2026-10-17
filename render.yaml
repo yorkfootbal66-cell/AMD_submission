@@ -1,0 +1,22 @@
+# Render Blueprint: free web service, native Python, no Docker.
+services:
+  - type: web
+    name: order-desk-agent
+    runtime: python
+    plan: free
+    buildCommand: python -m compileall -q orderdesk
+    startCommand: ORDERDESK_PORT=$PORT python -m orderdesk.server
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
+      - key: ORDERDESK_DATA_DIR
+        value: /tmp/orderdesk
+      - key: ORDERDESK_TODAY
+        value: "2026-10-13"
+      - key: ORDERDESK_MODEL_BASE_URL
+        sync: false
+      - key: ORDERDESK_MODEL_NAME
+        sync: false
+      - key: ORDERDESK_MODEL_API_KEY
+        sync: false

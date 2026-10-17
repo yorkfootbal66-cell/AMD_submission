@@ -6,6 +6,7 @@
   POST /api/cases   {"email": "..."} -> the handled case
   GET  /api/cases   the last cases from the ledger
   GET  /api/model   which endpoint and model the agent uses, and whether that endpoint is the local stand-in
+  POST /api/reset   back to the synthetic starting state (sample order book, empty ledger)
   GET  /healthz     "ok"
 """
 from __future__ import annotations
@@ -14,6 +15,7 @@ import html
 import json
 import os
 import shutil
+from datetime import date
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -26,7 +28,9 @@ PAGE = """<!doctype html><meta charset="utf-8"><title>Order desk agent</title>
 <style>body{{font:16px/1.45 system-ui,sans-serif;max-width:860px;margin:24px auto;padding:0 16px}}textarea{{width:100%;height:140px}}
 .case{{border:1px solid #bbb;border-radius:6px;padding:10px 14px;margin:12px 0}}.person{{border-color:#b45309}}small{{color:#555}}.warn{{background:#fef3c7;padding:8px 12px;border-radius:6px}}</style>
 <h1>Order desk agent</h1>
-<p>Model: <b>{model}</b> at <b>{host}</b></p>{warning}
+<p>Model: <b>{model}</b> at <b>{host}</b></p><p><small>Demo date for the rules: {today}{pin_note}</small></p>{warning}
+<p class="warn">Synthetic demo. All orders and customers are made up. Cases and the order book live in this host's temporary storage and are lost on every restart or redeploy; use Reset to return to the starting state. Saved evidence of real runs is in the repository under docs/evidence/.</p>
+<form method="post" action="/reset"><button>Reset the demo</button></form>
 <form method="post" action="/"><textarea name="email" placeholder="Paste a customer email here"></textarea><p><button>Handle this email</button></p></form>
 <h2>Cases</h2>{cases}"""
 
@@ -56,7 +60,7 @@ def make_handler(desk: OrderDesk, model: ChatModel):
                 rows.append(f'<div class="case {html.escape(case["by"])}"><b>{html.escape(case["action"])}</b> by the {html.escape(case["by"])} '
                             f'<small>{html.escape(case["case_id"])} · order {html.escape(str(reading.get("order_id")))} · {html.escape(str(reading.get("issue")))} · '
                             f'{(case.get("model") or {}).get("latency_ms", "-")} ms</small><br>{html.escape("; ".join(case["reasons"]))}<br><i>{html.escape(case["reply"])}</i></div>')
-            self._send(PAGE.format(model=html.escape(facts["model"]), host=html.escape(facts["endpoint_host"]), warning=warning, cases="".join(rows) or "<p>None yet.</p>"), kind="text/html")
+            self._send(PAGE.format(model=html.escape(facts["model"]), host=html.escape(facts["endpoint_host"]), warning=warning, today=html.escape(str(desk.today())), pin_note=" (pinned so the synthetic orders stay in their time windows)" if os.environ.get("ORDERDESK_TODAY") else "", cases="".join(rows) or "<p>None yet.</p>"), kind="text/html")
 
         def do_GET(self):  # noqa: N802
             if self.path == "/healthz":
@@ -79,6 +83,12 @@ def make_handler(desk: OrderDesk, model: ChatModel):
                 except (ValueError, KeyError, AssertionError, TypeError):
                     return self._send({"error": 'send {"email": "<the customer\'s message>"}'}, 400)
                 self._send(desk.handle(email))
+            elif self.path in ("/reset", "/api/reset"):
+                desk.reset(ROOT / "samples" / "orders.json")
+                if self.path == "/api/reset":
+                    self._send({"reset": True})
+                else:
+                    self._page()
             elif self.path == "/":
                 from urllib.parse import parse_qs
                 email = (parse_qs(raw.decode("utf-8")).get("email") or [""])[0]
@@ -99,7 +109,9 @@ def build(data_dir: Path | None = None, model: ChatModel | None = None) -> tuple
     if not (data / "orders.json").is_file():
         shutil.copyfile(ROOT / "samples" / "orders.json", data / "orders.json")
     model = model or ChatModel()
-    return OrderDesk(model, data / "orders.json", data / "ledger.jsonl"), model
+    pinned = os.environ.get("ORDERDESK_TODAY")                    # the sample orders carry fixed dates: pin "today" so a hosted demo keeps giving the recorded answers
+    today = (lambda: date.fromisoformat(pinned)) if pinned else None
+    return OrderDesk(model, data / "orders.json", data / "ledger.jsonl", today=today), model
 
 
 def main() -> int:

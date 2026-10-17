@@ -150,3 +150,19 @@ def test_the_app_never_calls_the_stand_in_amd():
     class Configured:
         name, endpoint_host = "some-open-model", "203.0.113.7:8000"
     assert model_facts(Configured())["runs_on_amd"].startswith("CLAIMED BY CONFIGURATION ONLY"), "an address in a variable is not evidence of hardware"
+
+
+def test_reset_restores_the_synthetic_starting_state(desk):
+    shutil.copyfile(ROOT / "samples" / "orders.json", desk.orders_file)
+    desk.handle(SAMPLES[0]["email"])
+    assert desk.cases() and desk.orders_file.read_text() != (ROOT / "samples" / "orders.json").read_text()
+    desk.reset(ROOT / "samples" / "orders.json")
+    assert desk.cases() == []
+    assert desk.orders_file.read_text() == (ROOT / "samples" / "orders.json").read_text()
+
+
+def test_demo_date_can_be_pinned(tmp_path, monkeypatch):
+    from orderdesk import server
+    monkeypatch.setenv("ORDERDESK_TODAY", "2026-10-13")
+    desk, _ = server.build(tmp_path, FakeModel())
+    assert desk.today() == TODAY

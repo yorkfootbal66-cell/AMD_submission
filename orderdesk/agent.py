@@ -71,6 +71,12 @@ class OrderDesk:
                 handle.write(json.dumps(record, sort_keys=True) + "\n")
         return record
 
+    def reset(self, pristine_orders: Path) -> None:
+        """Back to the synthetic starting state: the sample order book, an empty ledger."""
+        with self._lock:
+            self.orders_file.write_text(Path(pristine_orders).read_text(encoding="utf-8"), encoding="utf-8")
+            self.ledger_file.write_text("", encoding="utf-8")
+
     def cases(self, last: int = 50) -> list:
         if not self.ledger_file.is_file():
             return []
