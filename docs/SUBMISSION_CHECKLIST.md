@@ -10,8 +10,8 @@ Official cutoff: 18 October 2026, 6:00 AM EDT (owner's participant-page screensh
 | Public repository | https://github.com/yorkfootbal66-cell/AMD_submission (MIT, copyright Johnathon Slaughter) |
 | Cover image | `docs/cover.svg` (PNG export needed if the form wants a raster) |
 | Slides | `docs/slides.html` (print to PDF if needed) |
-| Demo video | **NOT DONE.** Local app calling the remote endpoint; see `docs/DEMO_SCRIPT.md`, `docs/NARRATION.md`. |
-| Application URL | **NOT DONE.** Render Free, `render.yaml`; needs the owner's Render login and a revocable API key (`docs/DEPLOY_RENDER.md`). |
+| Demo video | Done: `submission_assets/order-desk-demo-local-app-amd-endpoint.mp4` (local app + remote AMD endpoint; real run 2026-10-18, ledger in `docs/evidence/ledger_video_recording.jsonl`). |
+| Application URL | https://order-desk-agent.onrender.com (supplied by the owner; not reachable from the build session, so NOT verified by us). |
 | Submission on lablab | **NOT DONE.** Owner signs in and submits; fields in `docs/SUBMISSION_TEXT.md`. |
 | Container build | Not verified (no Docker daemon in the build session); the Render deployment is native Python. |
 | Authorship | Written by an AI model (Claude, Anthropic) for the owner; synthetic data only. |
