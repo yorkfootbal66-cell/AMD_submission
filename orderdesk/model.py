@@ -1,7 +1,7 @@
-"""The one place the agent talks to a language model: an OpenAI-compatible chat endpoint (vLLM serves one).  Standard library only.
+"""The one place the agent talks to a language model: an OpenAI-compatible chat endpoint (for example AMD's Token Factory).  Standard library only.
 
 Configuration, from the environment and from nowhere else (no key is ever written to a file):
-  ORDERDESK_MODEL_BASE_URL   for example http://<your AMD Developer Cloud instance>:8000/v1
+  ORDERDESK_MODEL_BASE_URL   for example https://developer.amd.com.cn/radeon/api/v1
   ORDERDESK_MODEL_NAME       the open model that endpoint serves
   ORDERDESK_MODEL_API_KEY    optional bearer key of that endpoint
 

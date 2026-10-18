@@ -23,3 +23,7 @@ The event's FAQ names `notebooks.amd.com/tokenfactory` as the access route and s
 ## What none of this establishes
 
 An HTTP answer does not show the GPU model or the software stack behind it. No `rocm-smi` output exists for this entry, because the service is managed and the machine is not ours. The submission says "served by AMD's Token Factory", as the provider describes itself, and makes no claim about specific hardware beyond what the provider's page states.
+
+## What was actually used (2026-10-17/18)
+
+Base URL `https://developer.amd.com.cn/radeon/api/v1`, model `DeepSeek-V4-Flash`. The key was supplied by the build session's proxy and never appeared in any file or command. Provider usage check: 20 requests, no errors, cost 0.0007 USD against a 1 USD daily limit, 20 requests per minute allowed (`docs/evidence/USAGE_CHECK.json`; organisation ids omitted). The model list reports non-zero per-token prices; the actual charge seen is the figure above.

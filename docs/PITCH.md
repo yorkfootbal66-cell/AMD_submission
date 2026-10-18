@@ -27,7 +27,7 @@ The model reads. It does not decide and cannot order an action. The amount, the 
 
 ## Where AMD comes in
 
-The reading step is the workload: every case is one call to an open model served by vLLM on an AMD Developer Cloud GPU with ROCm. The app shows, for every case, which model on which endpoint read it and how long that took.
+The reading step is the workload: every case is one call to an open model served through AMD's managed Token Factory endpoint (DeepSeek-V4-Flash); per the provider's manual these shared endpoints run on AMD GPUs, which we did not measure ourselves. The app shows, for every case, which model on which endpoint read it and how long that took.
 
 ## What is measured
 
@@ -39,6 +39,6 @@ On the ten sample emails: which cases the agent settles alone, which go to a per
 2. Read, decide, act or hand over: the path of one case
 3. The rules, on one slide
 4. Live: three emails (a broken mug, a large refund, a message that mentions an injury)
-5. Where AMD runs: the instance, the model, the timings
+5. Where AMD runs: the Token Factory endpoint, the model, the measured timings
 6. What the agent refuses to do, and why that is the product
 7. What comes next: more request kinds, the shop's real order system, replies in the customer's language

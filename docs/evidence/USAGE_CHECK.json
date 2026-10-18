@@ -1,0 +1,23 @@
+{
+ "rpm_limit": 20,
+ "daily_cost_limit_usd": 1,
+ "daily_cost_used_usd": 0.0007092400337569416,
+ "daily_cost_remaining_usd": 0.9992907599662431,
+ "period_duration_unit": "day",
+ "all_time": {
+  "requests": 20,
+  "errors": 0,
+  "total_tokens": 4101,
+  "cost": 0.0007092400337569416
+ },
+ "by_model": [
+  {
+   "model": "DeepSeek-V4-Flash",
+   "requests": 20,
+   "errors": 0,
+   "total_tokens": 4101,
+   "cost": 0.0007092400337569416
+  }
+ ],
+ "checked_utc": "2026-10-18T04:56Z (organisation/project ids omitted)"
+}

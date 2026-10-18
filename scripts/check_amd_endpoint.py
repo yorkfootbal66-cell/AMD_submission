@@ -5,8 +5,7 @@
 It reads ORDERDESK_MODEL_BASE_URL, ORDERDESK_MODEL_NAME and ORDERDESK_MODEL_API_KEY from the environment, asks the endpoint which models it serves, and has it read every
 sample email.  It records the endpoint's host, the model names, each reading, whether it matches what the sample expects, and the timings.
 
-WHAT THIS DOES NOT PROVE.  An HTTP answer does not say what hardware produced it.  That the endpoint is a vLLM server on an AMD GPU is shown by evidence taken ON the instance
-(docs/AMD_SETUP.md: the instance page of AMD Developer Cloud, `rocm-smi` while a request runs, the vLLM start log).  Keep those next to this script's output.
+WHAT THIS DOES NOT PROVE.  An HTTP answer does not say what hardware produced it.  The hardware behind a managed endpoint is stated by its provider (the Token Factory manual), not shown by this script. See docs/TOKEN_FACTORY.md. Keep those next to this script's output.
 """
 from __future__ import annotations
 
